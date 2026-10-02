@@ -1,183 +1,698 @@
-# Vellora: Multi-brand Makeup & Cosmetics Store (Demo)
+# Vellora — Multi-brand Makeup & Cosmetics Store
 
-A full-stack e-commerce app: React + Vite on the front, Node + Express + MongoDB (Mongoose) on the back, with JWT auth, role-based admin tools, cart, checkout, orders and order tracking.
+A full-stack, responsive e-commerce web application for browsing and purchasing makeup and cosmetics products.
 
-> **Demo only.** Vellora is a fictional store. Real brand and product names (Maybelline, MAC, Fenty Beauty and so on) appear purely as sample catalog data. The store is not affiliated with, sponsored by, or endorsed by any of them, and is not an authorised retailer. No real payments, orders or deliveries happen.
+Built with **React + Vite** on the frontend, **Node.js + Express** on the backend, and **MongoDB + Mongoose** for data storage. The application includes JWT authentication, customer and admin roles, product management, cart and checkout functionality, order tracking, search, filtering, sorting, pagination, and production deployment using **Vercel + Render + MongoDB Atlas**.
 
-## Features
+> **Demo Project:** Vellora is a fictional cosmetics store created for demonstration and educational purposes. Real brand and product names such as Maybelline, MAC, and Fenty Beauty are used only as sample catalog data. Vellora is not affiliated with, sponsored by, endorsed by, or an authorized retailer of those brands. No real payments, purchases, or deliveries are processed.
 
-**Customers:** browse, search (name, brand, category), filter (category, brand, price, rating), sort, paginate, view product details with shade swatches, cart (add, change quantity, remove, clear; persists in the browser per user), register/login, checkout (Cash on Delivery or **Demo** card with no card data collected), order history, order tracking timeline, profile.
+---
 
-**Admins:** dashboard statistics, product CRUD with stock, all orders with status updates (customers see the change on their tracking page), customer list.
+## 🚀 Live Demo
 
-**Security:** passwords hashed (bcrypt algorithm via `bcryptjs`, which installs on Windows without build tools), JWT, backend admin checks (JWT → user → admin role) on every admin route, server-side price and stock validation, secrets only in `.env`.
+### Try Vellora
 
-## Tech stack
+🌐 **Live Website:**  
+https://vellora-e-commerce-website-akymooi7b-bavana1.vercel.app
 
-React 18, Vite 5, React Router 6, Axios, Context API, plain CSS · Node.js, Express 4, Mongoose 8, jsonwebtoken, bcryptjs, cors, dotenv · MongoDB (local or Atlas).
-
-## Folder structure
+### Demo Customer Account
 
 ```text
+Email:    user@beautystore.com
+Password: User@123
+Demo Admin Account
+Email:    admin@beautystore.com
+Password: Admin@123
+
+These are demonstration credentials only. Do not use real passwords or sensitive personal information.
+
+✨ Features
+
+🛍️ Customer Features
+Browse the cosmetics catalog
+Search products by name, brand, and category
+Filter by category, brand, price, and rating
+Sort by newest, price, rating, and name
+Product pagination
+Product detail pages
+Product shade selection
+Product image galleries
+Product benefits and descriptions
+Add products to cart
+Change product quantities
+Remove products from cart
+Clear cart
+Cart persistence in the browser
+User registration and login
+JWT-based authentication
+Protected customer routes
+Checkout
+Cash on Delivery
+Demo card payment
+Order confirmation
+Order history
+Order details
+Order tracking timeline
+Customer profile
+Responsive desktop, tablet, and mobile design
+
+👑 Admin Features
+Admin dashboard
+Dashboard statistics
+Product CRUD
+Create products
+View products
+Edit products
+Delete products
+Stock management
+Customer management
+View all orders
+Update order status
+Order tracking synchronization
+Protected admin routes
+Role-based authorization
+
+🔐 Security Features
+JWT authentication
+Password hashing with bcryptjs
+Protected API routes
+Admin-only API routes
+Server-side price validation
+Server-side stock validation
+JWT → user → role verification
+Environment variables for secrets
+CORS configuration
+Authentication token handling
+Invalid/expired token handling
+
+🛠️ Tech Stack
+Frontend
+React 18
+Vite 5
+React Router 6
+Axios
+React Context API
+JavaScript
+CSS
+Backend
+Node.js
+Express 4
+REST API
+Mongoose 8
+JSON Web Token (jsonwebtoken)
+bcryptjs
+CORS
+dotenv
+Database
+MongoDB
+MongoDB Atlas for production
+Deployment
+Frontend: Vercel
+Backend: Render
+Database: MongoDB Atlas
+Source Control: GitHub
+
+🏗️ Architecture
+                         ┌─────────────────────┐
+                         │       GitHub        │
+                         │   Source Repository │
+                         └──────────┬──────────┘
+                                    │
+                         ┌──────────┴──────────┐
+                         │                     │
+                         ▼                     ▼
+                 ┌───────────────┐    ┌────────────────┐
+                 │    Vercel     │    │     Render     │
+                 │ React + Vite  │    │ Node + Express │
+                 │   Frontend    │───▶│    Backend     │
+                 └───────────────┘    └───────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │ MongoDB Atlas   │
+                                      │                 │
+                                      │ • Users         │
+                                      │ • Products      │
+                                      │ • Orders        │
+                                      └─────────────────┘
+Production URLs
+
+Frontend
+
+https://vellora-e-commerce-website-akymooi7b-bavana1.vercel.app
+
+Backend
+
+https://vellora-backend.onrender.com
+
+Backend Health Check
+
+https://vellora-backend.onrender.com/api/health
+
+📁 Project Structure
 vellora/
+│
 ├── client/
-│   ├── public/favicon.svg
+│   ├── public/
+│   │   ├── favicon.svg
+│   │   └── products/
+│   │
 │   ├── src/
-│   │   ├── components/   Navbar, Footer, ProductCard, ProductGrid, SearchBar, FilterSidebar,
-│   │   │                 ProductImage, CartItem, OrderCard, OrderTimeline, ProtectedRoute,
-│   │   │                 AdminRoute, AdminLayout, LoadingSpinner, Toast, Modal, Pagination, Stars
-│   │   ├── context/      AuthContext, CartContext, ToastContext
-│   │   ├── hooks/        useDebounce
-│   │   ├── pages/        Home, Shop, ProductDetails, Cart, Checkout, Login, Register, Profile,
-│   │   │                 Orders, OrderDetails, TrackOrder, About, NotFound, admin/*
-│   │   ├── services/api.js
-│   │   ├── utils/format.js
-│   │   ├── App.jsx  main.jsx  index.css
-│   ├── index.html  vite.config.js  package.json  .env.example
+│   │   ├── components/
+│   │   │   ├── Navbar
+│   │   │   ├── Footer
+│   │   │   ├── ProductCard
+│   │   │   ├── ProductGrid
+│   │   │   ├── SearchBar
+│   │   │   ├── FilterSidebar
+│   │   │   ├── ProductImage
+│   │   │   ├── CartItem
+│   │   │   ├── OrderCard
+│   │   │   ├── OrderTimeline
+│   │   │   ├── ProtectedRoute
+│   │   │   ├── AdminRoute
+│   │   │   ├── AdminLayout
+│   │   │   ├── LoadingSpinner
+│   │   │   ├── Toast
+│   │   │   ├── Modal
+│   │   │   ├── Pagination
+│   │   │   └── Stars
+│   │   │
+│   │   ├── context/
+│   │   │   ├── AuthContext
+│   │   │   ├── CartContext
+│   │   │   └── ToastContext
+│   │   │
+│   │   ├── hooks/
+│   │   │   └── useDebounce
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Home
+│   │   │   ├── Shop
+│   │   │   ├── ProductDetails
+│   │   │   ├── Cart
+│   │   │   ├── Checkout
+│   │   │   ├── Login
+│   │   │   ├── Register
+│   │   │   ├── Profile
+│   │   │   ├── Orders
+│   │   │   ├── OrderDetails
+│   │   │   ├── TrackOrder
+│   │   │   ├── About
+│   │   │   ├── NotFound
+│   │   │   └── admin/
+│   │   │
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   │
+│   │   ├── utils/
+│   │   │   └── format.js
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── vercel.json
+│   ├── package.json
+│   └── .env.example
+│
 ├── server/
-│   ├── config/db.js
-│   ├── controllers/      auth, product, order, user
-│   ├── middleware/       auth.js (protect, adminOnly), error.js
-│   ├── models/           User, Product, Order
-│   ├── routes/           authRoutes, productRoutes, orderRoutes, userRoutes
-│   ├── utils/            categories, httpError, token
-│   ├── server.js  seed.js  package.json  .env.example
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── controllers/
+│   │   ├── auth
+│   │   ├── product
+│   │   ├── order
+│   │   └── user
+│   │
+│   ├── middleware/
+│   │   ├── auth.js
+│   │   └── error.js
+│   │
+│   ├── models/
+│   │   ├── User
+│   │   ├── Product
+│   │   └── Order
+│   │
+│   ├── routes/
+│   │   ├── authRoutes
+│   │   ├── productRoutes
+│   │   ├── orderRoutes
+│   │   └── userRoutes
+│   │
+│   ├── utils/
+│   │   ├── categories
+│   │   ├── httpError
+│   │   └── token
+│   │
+│   ├── server.js
+│   ├── seed.js
+│   ├── package.json
+│   └── .env.example
+│
 ├── README.md
 └── .gitignore
-```
 
-## Prerequisites (Windows)
+⚙️ Prerequisites
 
-1. **Node.js 18 or newer (LTS):** download from https://nodejs.org, run the installer with defaults, then **restart VS Code**. Check with `node -v` and `npm -v`.
-2. **MongoDB**, one of:
+For local development, install:
 
-### Option A: Local MongoDB
-1. Download **MongoDB Community Server** (MSI) from https://www.mongodb.com/try/download/community.
-2. Run the installer, choose *Complete*, and keep **"Install MongoDB as a Service"** ticked.
-3. Check it's running: press `Win + R`, type `services.msc`, look for **MongoDB Server** with status *Running* (start it if not). Or run `mongosh` if you installed MongoDB Shell.
-4. Your connection string is `mongodb://127.0.0.1:27017/vellora-store`.
+Node.js 18 or newer
+npm
+MongoDB Community Server or MongoDB Atlas
+Git
+VS Code
 
-### Option B: MongoDB Atlas (cloud, free tier)
-1. Sign up at https://www.mongodb.com/cloud/atlas.
-2. **Create a cluster** (Free / M0 shared).
-3. **Database Access → Add New Database User:** choose a username and password (avoid `@ : /` in the password, or URL-encode it).
-4. **Network Access → Add IP Address:** use *Add Current IP Address* (or `0.0.0.0/0` for quick testing only).
-5. **Database → Connect → Drivers:** copy the connection string and put your database name before the `?`:
-   `mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/vellora-store?retryWrites=true&w=majority`
-6. Use it as `MONGODB_URI` in `server/.env`.
+Check your Node.js installation:
 
-## Setup in VS Code
+node -v
+npm -v
 
-1. Install Node.js and MongoDB (above).
-2. Open **VS Code** → **File → Open Folder…** → choose the `vellora` folder.
-3. Open a terminal: **Terminal → New Terminal**.
-4. Backend dependencies:
-   ```bash
-   cd server
-   npm install
-   ```
-5. Create **`server/.env`** (copy `.env.example` and edit, or create a new file named `.env` inside `server/`) with:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://127.0.0.1:27017/vellora-store
-   JWT_SECRET=put_a_long_random_string_here_at_least_32_characters
-   JWT_EXPIRES_IN=7d
-   CLIENT_URL=http://localhost:5173
-   ```
-   (For Atlas, replace `MONGODB_URI` with your Atlas string.) Never commit `.env`.
-6. Seed the database (47 products, 2 demo users). **This wipes products, users and orders first:**
-   ```bash
-   npm run seed
-   ```
-7. Start the API:
-   ```bash
-   npm run dev
-   ```
-   You should see `MongoDB connected` and `API running at http://localhost:5000`. Check http://localhost:5000/api/health.
-8. Open a **second terminal** (click the `+` in the terminal panel) and run:
-   ```bash
-   cd client
-   npm install
-   npm run dev
-   ```
-9. Open the URL Vite prints, usually **http://localhost:5173**.
+💻 Local Development Setup
+1. Clone the Repository
+git clone <YOUR_GITHUB_REPOSITORY_URL>
+cd vellora
+2. Install Backend Dependencies
+cd server
+npm install
+3. Create Backend Environment Variables
 
-Optional: to point the frontend at a different API, copy `client/.env.example` to `client/.env` and edit `VITE_API_URL`.
+Create:
 
-## Demo accounts (demo credentials only)
+server/.env
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@beautystore.com | Admin@123 |
-| Customer | user@beautystore.com | User@123 |
+Example:
 
-## Product images
+PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/vellora-store
+JWT_SECRET=put_a_long_random_string_here_at_least_32_characters
+JWT_EXPIRES_IN=7d
+CLIENT_URL=http://localhost:5173
 
-Seed products use `placehold.co` placeholder images, because stable official product-image URLs can't be guaranteed to keep working. In **Admin → Products → Edit** you can paste any image URL you have the right to use. If any image fails to load, the app swaps in a built-in fallback image, so cards never break.
+For MongoDB Atlas, replace MONGODB_URI with your Atlas connection string.
 
-## Pricing rules
+Never commit .env to GitHub.
 
-Prices are in INR (₹). Shipping is ₹59, free when the subtotal is ₹999 or more. Prices and stock are always re-checked on the server when an order is placed.
+4. Seed the Database
 
-## API reference
+From the server directory:
 
-Base URL `http://localhost:5000/api`. Send `Authorization: Bearer <token>` where marked.
+npm run seed
 
-| Method | Path | Access | Notes |
-|---|---|---|---|
-| POST | /auth/register | public | `name, email, password, confirmPassword` |
-| POST | /auth/login | public | returns `{ token, user }` |
-| GET | /auth/me | user | current user |
-| PUT | /auth/me | user | update `name`, `phone` |
-| GET | /products | public | `search, category, brand, minPrice, maxPrice, rating, sort, page, limit` |
-| GET | /products/meta/filters | public | brands, category groups, price bounds |
-| GET | /products/:id | public | |
-| POST | /products | admin | create |
-| PUT | /products/:id | admin | update |
-| DELETE | /products/:id | admin | delete |
-| POST | /orders | user | `customerInfo, shippingAddress, items[{product, quantity, shade}], paymentMethod (COD or DEMO_CARD)` |
-| GET | /orders/my-orders | user | own orders |
-| GET | /orders/:id | owner or admin | |
-| GET | /orders | admin | optional `?status=` |
-| PUT | /orders/:id/status | admin | `{ status }` (cancelling restores stock) |
-| GET | /orders/stats/summary | admin | dashboard numbers |
-| GET | /users, /users/:id | admin | |
+The seed script creates the demo product catalog and demo users.
 
-`sort` values: `newest`, `price-asc`, `price-desc`, `rating`, `name-asc`. `category` accepts a group (`Lips`) or a sub-category (`Lipstick`). Errors return `{ "message": "..." }` with 400, 401, 403, 404 or 500.
+Warning: The seed script clears existing products, users, and orders before inserting the demo data.
 
-## Testing checklist
+5. Start the Backend
+npm run dev
 
-**Authentication:** register a new user · log in · log out · wrong password shows an error · registering an existing email is rejected · opening `/profile` logged out redirects to login.
+The backend runs at:
 
-**Customer:** Home loads featured products · Shop search (try `lipstick`, `maybelline`) · each filter (category, brand, price, rating) · each sort · pagination (12 per page) · product page shows shades, gallery, benefits · add to cart with a shade · change quantity with +/− and by typing · remove · clear cart (confirm dialog) · refresh the page and the cart persists · checkout validation messages · place a COD order · confirmation appears · order shows in My Orders · Track Order shows the timeline · try ordering more than the stock (edit stock in admin first) and expect an error.
+http://localhost:5000
 
-**Admin:** log in as admin · dashboard numbers · add a product · edit it (change stock) · delete it · Customers page lists users · Orders page: change a status, then open that order's Track page as the customer and see it update (the page also refreshes itself every 20 seconds).
+Health check:
 
-**Security:** as the customer, open `/admin` (redirected) · call an admin API with the customer's token (expect 403) · call `/api/orders/my-orders` without a token (expect 401) · send a garbage token (expect 401).
+http://localhost:5000/api/health
 
-Quick API check from PowerShell:
-```powershell
-Invoke-RestMethod http://localhost:5000/api/products?limit=2
-```
+Expected response:
 
-## Troubleshooting (Windows + VS Code)
+{
+  "status": "ok"
+}
+6. Start the Frontend
 
-| Problem | Fix |
-|---|---|
-| `npm is not recognized` | Install Node.js LTS, then fully close and reopen VS Code. Check `node -v`. |
-| MongoDB connection failed | Local: start **MongoDB Server** in `services.msc`, and use `127.0.0.1` rather than `localhost` in `MONGODB_URI`. Atlas: whitelist your IP, check username/password, URL-encode special characters. |
-| Port 5000 already in use | `netstat -ano \| findstr :5000`, then `taskkill /PID <pid> /F`. Or change `PORT` in `.env` and `VITE_API_URL` in `client/.env`. |
-| Port 5173 already in use | Vite will pick the next port automatically (e.g. 5174). If it does, set `CLIENT_URL=http://localhost:5173,http://localhost:5174` in `server/.env` and restart the API. |
-| CORS error | `CLIENT_URL` must exactly match the browser URL (including the port). Restart the API after editing `.env`. |
-| Frontend can't connect to backend | Confirm http://localhost:5000/api/health works, the API terminal shows no errors, and `VITE_API_URL` (if set) ends with `/api`. |
-| JWT / "Invalid session" | `JWT_SECRET` must exist in `server/.env`. If you change it, log out and in again (old tokens become invalid). |
-| Seed script error | Make sure MongoDB is running and `server/.env` exists with `MONGODB_URI`. Run from the `server` folder. |
-| Module not found | Run `npm install` in the folder that errors (`server` or `client`). Delete `node_modules` and reinstall if it persists. |
-| Vite error / blank page | Open the browser console (F12). Make sure you ran `npm install` in `client`, and run `npm run dev` from `client`. Stop and restart Vite after changing `.env`. |
-| `nodemon` not recognised | Run `npm install` in `server` (it's a dev dependency), then `npm run dev`. |
-| PowerShell blocks npm scripts | Run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, or use the Command Prompt terminal in VS Code. |
-| Product images not loading | Check your internet connection (placeholders are hosted online). A fallback image shows automatically. Replace image URLs in Admin if needed. |
+Open a second terminal:
 
-## Production note
+cd client
+npm install
+npm run dev
 
-This is a learning/demo project. Before real use you would add rate limiting, helmet, HTTPS, a real payment provider, email, stronger session handling and automated tests.
+Vite will normally provide:
+
+http://localhost:5173
+
+🔗 Frontend API Configuration
+
+The frontend uses the following environment variable:
+
+VITE_API_URL=http://localhost:5000/api
+
+For the deployed application:
+
+VITE_API_URL=https://vellora-backend.onrender.com/api
+
+🔑 Demo Accounts
+Role	Email	Password
+Customer	user@beautystore.com	User@123
+Admin	admin@beautystore.com	Admin@123
+
+These credentials are for demonstration purposes only.
+
+🖼️ Product Images
+
+The product catalog uses a combination of product imagery and built-in category-based illustrations.
+
+Category-specific visuals are available for products such as:
+
+Foundation
+Concealer
+Primer
+Setting Powder
+Setting Spray
+Blush
+Highlighter
+Contour
+Eyeshadow
+Eyeliner
+Mascara
+Eyebrow Pencil
+Kajal
+Lipstick
+Lip Gloss
+Lip Liner
+Lip Tint
+Liquid Lipstick
+Makeup Brushes
+Beauty Sponges
+Eyelash Curlers
+Cleanser
+Moisturizer
+Face Serum
+Makeup Remover
+
+The application also includes a dedicated Maybelline Fit Me product image.
+
+A built-in fallback image system prevents broken product images from breaking the product cards.
+
+💰 Pricing Rules
+
+All prices are displayed in Indian Rupees (₹).
+
+Rule	Value
+Shipping	₹59
+Free shipping	Orders ≥ ₹999
+
+Product prices and stock are revalidated by the backend when an order is placed.
+
+💳 Payment Methods
+
+Vellora does not process real payments.
+
+Available demonstration methods:
+
+Cash on Delivery
+Demo Card
+
+No real card information is processed or stored.
+
+📦 Order Management
+Customers
+
+Customers can:
+
+Place orders
+View order history
+View order details
+Track orders
+See order status updates
+Admins
+
+Admins can:
+
+View all orders
+Update order status
+Manage products
+Manage stock
+View customers
+
+Customer tracking pages reflect administrator order-status updates.
+
+🔌 API Reference
+Production API
+https://vellora-backend.onrender.com/api
+Local API
+http://localhost:5000/api
+
+Authentication uses:
+
+Authorization: Bearer <token>
+Authentication
+Method	Endpoint	Access	Description
+POST	/auth/register	Public	Register a user
+POST	/auth/login	Public	Login
+GET	/auth/me	User	Get current user
+PUT	/auth/me	User	Update profile
+Products
+Method	Endpoint	Access	Description
+GET	/products	Public	Browse products
+GET	/products/meta/filters	Public	Get filter metadata
+GET	/products/:id	Public	Get product details
+POST	/products	Admin	Create product
+PUT	/products/:id	Admin	Update product
+DELETE	/products/:id	Admin	Delete product
+Orders
+Method	Endpoint	Access	Description
+POST	/orders	User	Create order
+GET	/orders/my-orders	User	Get user's orders
+GET	/orders/:id	Owner/Admin	Get order details
+GET	/orders	Admin	Get all orders
+PUT	/orders/:id/status	Admin	Update order status
+GET	/orders/stats/summary	Admin	Dashboard statistics
+Users
+Method	Endpoint	Access	Description
+GET	/users	Admin	List customers
+GET	/users/:id	Admin	Get customer details
+
+🔍 Search, Filtering & Sorting
+Search
+
+Products can be searched by:
+
+Name
+Brand
+Category
+Filters
+Category
+Brand
+Minimum price
+Maximum price
+Rating
+Sorting
+newest
+price-asc
+price-desc
+rating
+name-asc
+
+🧪 Testing Checklist
+Authentication
+ Register a new user
+ Login
+ Logout
+ Invalid password handling
+ Existing email validation
+ Protected profile route
+ Session expiration handling
+ 
+Customer
+ Home page
+ Product catalog
+ Product search
+ Category filtering
+ Brand filtering
+ Price filtering
+ Rating filtering
+ Sorting
+ Pagination
+ Product details
+ Shade selection
+ Add to cart
+ Change quantity
+ Remove item
+ Clear cart
+ Cart persistence
+ Checkout validation
+ COD order
+ Demo card order
+ Order confirmation
+ My Orders
+ Order details
+ Track Order
+ Stock validation
+ 
+Admin
+ Admin login
+ Dashboard statistics
+ Add product
+ Edit product
+ Delete product
+ Stock management
+ Customer list
+ Orders management
+ Order status updates
+ Customer tracking updates
+ 
+Security
+ Customer cannot access admin pages
+ Customer token cannot access admin APIs
+ Unauthenticated requests return 401
+ Invalid tokens return 401
+ Admin-only endpoints reject regular users
+ 
+☁️ Production Deployment
+
+Vellora is deployed using GitHub + Vercel + Render + MongoDB Atlas.
+
+GitHub
+   │
+   ├── Vercel
+   │     └── React + Vite Frontend
+   │
+   └── Render
+         └── Node + Express Backend
+                │
+                └── MongoDB Atlas
+Frontend — Vercel
+
+Frontend directory:
+
+client/
+
+Build command:
+
+npm run build
+
+Production API:
+
+https://vellora-backend.onrender.com/api
+
+The React Router SPA configuration is handled through:
+
+client/vercel.json
+Backend — Render
+
+Backend directory:
+
+server/
+
+Build command:
+
+npm install
+
+Start command:
+
+npm start
+
+Production environment variables include:
+
+MONGODB_URI=<MongoDB Atlas connection string>
+JWT_SECRET=<secure secret>
+PORT=10000
+CLIENT_URL=<Vercel frontend URL>
+Database — MongoDB Atlas
+
+MongoDB Atlas stores:
+
+Users
+Products
+Orders
+
+🩺 Backend Health Check
+
+Production health endpoint:
+
+https://vellora-backend.onrender.com/api/health
+
+Expected response:
+
+{
+  "status": "ok"
+}
+
+🔒 Environment Variables
+
+Never commit secrets to GitHub.
+
+Backend
+PORT=
+MONGODB_URI=
+JWT_SECRET=
+JWT_EXPIRES_IN=
+CLIENT_URL=
+Frontend
+VITE_API_URL=
+
+VITE_API_URL is intentionally available to the browser because the frontend needs the public API address.
+
+Never place passwords, database credentials, JWT secrets, API private keys, or other sensitive values in VITE_* variables.
+
+🐛 Troubleshooting
+Problem	Solution
+npm is not recognized	Install Node.js LTS and restart VS Code
+MongoDB connection failed	Check MongoDB service or Atlas connection details
+Port 5000 already in use	Find and stop the process using port 5000
+Port 5173 already in use	Vite automatically selects another available port
+CORS error	Make sure CLIENT_URL exactly matches the frontend origin
+Frontend cannot reach backend	Check VITE_API_URL and make sure it ends with /api
+JWT / Invalid session	Verify JWT_SECRET and log in again
+Seed error	Check MongoDB connection and .env
+Blank Vite page	Check the browser console and restart Vite
+Product image fails	Check the image URL; built-in fallback handling is available
+Vercel route returns 404	Verify client/vercel.json exists and contains the SPA rewrite
+Render deployment fails	Check Render environment variables and deployment logs
+
+📌 Production Notes
+
+Vellora is a learning/demo e-commerce application.
+
+For real commercial use, additional production features would be required, including:
+
+Real payment gateway integration
+Payment verification and webhooks
+Rate limiting
+Helmet/security headers
+Advanced session/token management
+Email notifications
+Email verification
+Password reset
+Automated testing
+Monitoring and logging
+Image hosting/CDN
+Inventory reservation
+Production-grade validation
+Database backups
+Disaster recovery
+Privacy and legal compliance
+
+🌐 Try Vellora
+
+Live Demo:
+https://vellora-e-commerce-website-akymooi7b-bavana1.vercel.app
+
+Backend:
+https://vellora-backend.onrender.com
+
+Backend Health:
+https://vellora-backend.onrender.com/api/health
+
+👩‍💻 Project Summary
+
+Vellora is a full-stack cosmetics e-commerce application demonstrating:
+
+Modern React frontend development
+REST API architecture
+JWT authentication
+Role-based authorization
+MongoDB database integration
+Product catalog management
+Shopping cart workflows
+Checkout and order management
+Admin dashboard functionality
+Responsive UI design
+Cloud deployment
+Production frontend/backend integration
+
+Built as a full-stack web development project using React, Node.js, Express, MongoDB, Vercel, Render, and MongoDB Atlas.
